@@ -6,7 +6,23 @@ angular.module('inmuebles').controller('InmueblesController', ['$scope', '$rootS
 		$scope.authentication = Authentication;
 		$scope.categoriaActual=categorias.categoriaActual;
 		$scope.transaccionActual=transacciones.transaccionActual;
-  
+            
+            $scope.totalItems = 18;
+            $scope.viewby = 9;
+            $scope.currentPage = 1;
+            $scope.itemsPerPage = $scope.viewby;
+            $scope.maxSize = 5;
+
+            $scope.setPage = function (pageNo) {
+                $scope.currentPage = pageNo;
+            };
+
+            $scope.setItemsPerPage = function(num) {
+              $scope.itemsPerPage = num;
+              $scope.currentPage = 1; //reset to first paghe
+            }
+
+
             $scope.setCategoria =function(categoria){
 			$scope.categoriaActual=categoria;
 		}
@@ -252,7 +268,11 @@ para poder acceder a sus datos*/
                         no_plantas: this.no_plantas,
 				no_habitaciones: this.no_habitaciones,
 				no_banos: this.no_banos,
-				no_carros: this.no_carros
+				no_carros: this.no_carros,
+                        infoAdicional: this.infoAdicional,
+                        nombreContacto: this.nombreContacto,
+                        telContacto: this.telContacto,
+                        mailContacto: this.mailContacto
 			});
 
                   Upload.upload({
@@ -280,6 +300,10 @@ para poder acceder a sus datos*/
 				$scope.no_habitaciones = '';
 				$scope.no_banos = '';
 				$scope.no_carros = '';
+                        $scope.infoAdicional="";
+                        $scope.nombreContacto="";
+                        $scope.telContacto="";
+                        $scope.mailContacto="";
 				
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
@@ -346,7 +370,8 @@ para poder acceder a sus datos*/
 		// Find a list of Inmuebles
 		$scope.find = function() {
 			$scope.inmuebles = Inmuebles.query();
-                  console.log($scope.inmuebles);
+                  $scope.totalItems = 18;
+                  
 		};
 
 		// Find existing Inmueble

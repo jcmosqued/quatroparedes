@@ -65,7 +65,7 @@
         <h4>Buscar por:</h4>
         
         <label>Tipo de inmueble: <br>
-            <select ng-model="categoriaActual" class="form-control">
+            <select id="inmCategoria" ng-model="categoriaActual" class="form-control">
                 <option value=""></option>
                 <option value="Casa">Casa</option>
                 <option value="Departamento">Departamento</option>
@@ -80,7 +80,7 @@
         </label><br>
 
         <label>Tipo de transacción:<br>
-            <select ng-model="transaccionActual" class="form-control">
+            <select id="inmTransaccion" ng-model="transaccionActual" class="form-control">
                 <option value=""></option>
                 <option value="Venta">Venta</option>
                 <option value="Renta">Renta</option>
@@ -111,24 +111,13 @@
         </label><br>
         </label>
         <label>Precio: <br>
-            <input ng-model="Precio">
+            <input id="inm" ng-model="Precio">
         </label>
         <label>No. de plantas: <br>
             <input type="number" ng-model="noPlantas" min="1">
         </label> <br>
         <br>
 
-        <!--sección publicidad
-          <div class="col-md-2"><br>
-            <iframe src="modules/inmuebles/publicidad1.html" 
-             width="250px" height="300px" marginwidth="0" scrolling="yes" frameborder="0" >
-            </iframe><br><br>
-
-            <iframe src="modules/inmuebles/publicidad2.html" 
-           width="250px" height="300px" marginwidth="0" scrolling="yes" frameborder="0"></iframe>
-
-           <iframe src="modules/inmuebles/publicidad3.html" 
-           width="250px" height="300px" marginwidth="0" scrolling="yes" frameborder="0"></iframe>-->
            <div class="col-md-2"><br>
            <img src="modules/core/img/GIF_1.gif" width="250px" height="250px" marginwidth="0" scrolling="yes" frameborder="0"><br><br><br>
            <img src="modules/core/img//GIF_2.gif" width="250px" height="250px" marginwidth="0" scrolling="yes" frameborder="0"><br><br><br>
@@ -144,7 +133,7 @@
     <!-- Inmuebles  | orderBy:['-tipoDestacado', '-user.tipo']-->
     <h4>Mostrando {{(inmuebles | filter:{tipo_inmueble: categoriaActual,  tipo_trans: transaccionActual, precio:Precio, estado: estado.valor, ciudad: ciudad.nombre, zona: Zona, no_plantas: noPlantas}).length}} de {{inmuebles.length}} registros con tus criterios de búsqueda</h4>
     <div class="col-md-9">
-        <div class="col-md-4" data-ng-repeat="inmueble in inmuebles | filter :{tipo_inmueble: categoriaActual,  tipo_trans: transaccionActual, no_plantas: noPlantas, estado: estado.valor, ciudad: ciudad.nombre, zona: Zona, precio:Precio, no_plantas: noPlantas} ">
+        <div class="col-md-4" dir-paginate="inmueble in inmuebles | filter :{tipo_inmueble: categoriaActual,  tipo_trans: transaccionActual, no_plantas: noPlantas, estado: estado.valor, ciudad: ciudad.nombre, zona: Zona, precio:Precio, no_plantas: noPlantas} | itemsPerPage: 9 | orderBy:['-tipoDestacado', '-user.tipo']">
 
         <table data-ng-show="inmueble.user.estatus==='activo'"><br>
             <tr class="img-thumbnail">        
@@ -212,6 +201,10 @@
             </tr>
         </table>
         </div>
+        
+    </div>
+    <div>
+      <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true" > </dir-pagination-controls>
     </div>
 
     

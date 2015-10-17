@@ -28,10 +28,11 @@ var InmuebleSchema = new Schema({
 	no_carros: { type: Number, default: 0 },
 	m2terreno: { type: Number, default: 0 },
 	m2construccion: { type: Number, default: 0 },
+	infoAdicional:{ type: String, default: '' },
 	nombreContacto:{ type: String, default: '' },
 	telContacto:{ type: String, default: '' },
 	mailContacto:{ type: String, default: '' },
-	image:{ type: Array, default:'' },
+	image:{ type: Array, default:'/uploads/Default.png' },
 	tipoDestacado:{type: Number, default: 0},
 	created: { type: Date, default: Date.now },
 	user: { type: Schema.ObjectId, ref: 'User'}

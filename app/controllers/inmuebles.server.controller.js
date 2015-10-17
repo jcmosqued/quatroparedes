@@ -42,24 +42,25 @@ exports.createWithUpload = function(req, res) {
         inmueble.user = req.user;
 
         req.files.file.forEach(function (element, index, array){
-        	var tmpPath = element.path;	
-        	var extIndex = tmpPath.lastIndexOf('.');
-        	var extension = (extIndex < 0) ? '' : tmpPath.substr(extIndex);
-	        var fileName = uuid.v4() + extension;
-    	    var destPath = './public/uploads/' + fileName;
-    	    inmueble.image[index] = '/uploads/' + fileName;
-	        var is = fs.createReadStream(tmpPath);
-	        var os = fs.createWriteStream(destPath);
+        	if (index <=4){
+	        	var tmpPath = element.path;	
+	        	var extIndex = tmpPath.lastIndexOf('.');
+	        	var extension = (extIndex < 0) ? '' : tmpPath.substr(extIndex);
+		        var fileName = uuid.v4() + extension;
+	    	    var destPath = './public/uploads/' + fileName;
+	    	    inmueble.image[index] = '/uploads/' + fileName;
+		        var is = fs.createReadStream(tmpPath);
+		        var os = fs.createWriteStream(destPath);
 
-	        if(is.pipe(os)) {
-	            fs.unlink(tmpPath, function (err) { //To unlink the file from temp path after copy
-	                if (err) {
-	                    console.log(err);
-	                }
-	            });
-	        } else
-	            return res.json('Archivo no guardado');
-
+		        if(is.pipe(os)) {
+		            fs.unlink(tmpPath, function (err) { //To unlink the file from temp path after copy
+		                if (err) {
+		                    console.log(err);
+		                }
+		            });
+		        } else
+		            return res.json('Archivo no guardado');
+	        }
         });   
 ////////////////////////////////
             inmueble.save(function(err) {
@@ -130,8 +131,9 @@ exports.list = function(req, res) {
 		}
 	}, docsPerPage, anchorId).sort('-tipoDestacado');*/
 	
-	
-	Inmueble.find().sort('-tipoDestacado').populate('user').exec(function(err, inmuebles) {
+	Inmueble.find()
+		.sort('-tipoDestacado')
+		.populate('user').exec(function(err, inmuebles) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -140,7 +142,7 @@ exports.list = function(req, res) {
 			res.jsonp(inmuebles);
 		}
 	});
-	console.log(req.body);
+	
 };
 
 /**

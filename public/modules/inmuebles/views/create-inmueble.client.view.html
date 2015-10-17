@@ -93,9 +93,13 @@
                 <label class="control-label" for="m3construccion">m2 Construcción:</label>
                 <input type="text" data-ng-model="m3construccion" id="m3construccion" class="form-control" placeholder="m2 de construcción">
 
+                <label class="control-label" for="infoAdicional">Información Adicional:</label>
+                <textarea type="text" data-ng-model="infoAdicional" id="infoAdicional" class="form-control" style="height:100px" placeholder="Información Adicional" maxlength="250"> </textarea>
+
                 <label class="control-label" for="image">Seleccionar fotos</label><br>
+                <label >*** Solo puedes subir 5 imagenes</label><br>
                 <div class="controls">
-                    <input id="image" type="file" ngf-select data-ng-model="image" name="image" accept="image/*" ngf-resize="{width: 300, height: 300, quality: .5}" ngf-multiple="true">
+                    <input id="image" type="file" ngf-select data-ng-model="image" name="image" accept="image/*" ngf-resize="{width: 300, height: 300, quality: 1}" ngf-multiple="true">
                 </div>
 
 <!--               <label class="control-label" for="image">Imagenes adicionales</label><br>
