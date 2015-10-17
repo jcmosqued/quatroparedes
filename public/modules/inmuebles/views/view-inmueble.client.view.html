@@ -31,19 +31,19 @@
 	 
 			    <div class="carousel-inner" role="listbox"   width: "60%" height:"350px">
 				   	<div class="item active">
-		            	<img ng-src="data:image/jepg;base64,{{item.image.base64}}" width="200" height="200" class="img-modal">
+		            	<img ng-src="{{item.image[0]}}" width="200" height="200" class="img-modal">
 		            </div>
 				   	<div class="item">
-		            	<img ng-src="data:image/jepg;base64,{{item.imagenes[0].base64}}" width="200" height="200" class="img-modal">
+		            	<img ng-src="{{item.image[1]}}" width="200" height="200" class="img-modal">
 		            </div>
 				    <div class="item">
-				        <img ng-src="data:image/jepg;base64,{{item.imagenes[1].base64}}" width="200" height="200" class="img-modal">
+				        <img ng-src="{{item.image[2]}}" width="200" height="200" class="img-modal">
 				    </div>
 				    <div class="item">
-				        <img ng-src="data:image/jepg;base64,{{item.imagenes[2].base64}}" width="200" height="200" class="img-modal">
+				        <img ng-src="{{item.image[3]}}" width="200" height="200" class="img-modal">
 				    </div>
 				    <div class="item">
-				        <img ng-src="data:image/jepg;base64,{{item.imagenes[3].base64}}" width="200" height="200" class="img-modal">
+				        <img ng-src="{{item.image[4]}}" width="200" height="200" class="img-modal">
 				    </div>
 			    </div>
 
@@ -83,34 +83,34 @@
 	 
 			    <div class="carousel-inner" role="listbox"   width: "100%" height:"350px">
 				   	<div class="item active">
-		            	<img ng-src="data:image/jepg;base64,{{item.image.base64}}" width="200" height="200" class="img-modal">
+		            	<img ng-src="{{item.image[0]}}" width="200" height="200" class="img-modal">
 		            </div>
 				   	<div class="item">
-		            	<img ng-src="data:image/jepg;base64,{{item.imagenes[0].base64}}" width="200" height="200" class="img-modal">
+		            	<img ng-src="{{item.image[1]}}" width="200" height="200" class="img-modal">
 		            </div>
 				    <div class="item">
-				        <img ng-src="data:image/jepg;base64,{{item.imagenes[1].base64}}" width="200" height="200" class="img-modal">
+				        <img ng-src="{{item.image[2]}}" width="200" height="200" class="img-modal">
 				    </div>
 				    <div class="item">
-				        <img ng-src="data:image/jepg;base64,{{item.imagenes[2].base64}}" width="200" height="200" class="img-modal">
+				        <img ng-src="{{item.image[3]}}" width="200" height="200" class="img-modal">
 				    </div>
 				    <div class="item">
-				        <img ng-src="data:image/jepg;base64,{{item.imagenes[3].base64}}" width="200" height="200" class="img-modal">
+				        <img ng-src="{{item.image[4]}}" width="200" height="200" class="img-modal">
 				    </div>
 				    <div class="item">
-				        <img ng-src="data:image/jepg;base64,{{item.imagenes[4].base64" width="200" height="200" class="img-modal">
+				        <img ng-src="{{item.image[5]}}" width="200" height="200" class="img-modal">
 				    </div>
 				    <div class="item">
-				        <img ng-src="data:image/jepg;base64,{{item.imagenes[5].base64}}" width="200" height="200" class="img-modal">
+				        <img ng-src="{{item.image[6]}}" width="200" height="200" class="img-modal">
 				    </div>
 				    <div class="item">
-				        <img ng-src="data:image/jepg;base64,{{item.imagenes[6].base64}}" width="200" height="200" class="img-modal">
+				        <img ng-src="{{item.image[7]}}" width="200" height="200" class="img-modal">
 				    </div>
 				    <div class="item">
-				        <img ng-src="data:image/jepg;base64,{{item.imagenes[7].base64}}" width="200" height="200" class="img-modal">
+				        <img ng-src="{{item.image[8]}}" width="200" height="200" class="img-modal">
 				    </div>
 				    <div class="item">
-				        <img ng-src="data:image/jepg;base64,{{item.imagenes[8].base64}}" width="200" height="200" class="img-modal">
+				        <img ng-src="{{item.image[0]}}" width="200" height="200" class="img-modal">
 				    </div>
 			    </div>
 
@@ -134,7 +134,7 @@
 			        Estado: {{item.estado}} <br/>
 			        Ciudad: {{item.ciudad}} <br/>
 			        Colonia: {{item.colonia}} <br/>
-			        Precio: {{item.precio | currency}} {{inmueble.moneda}}<br>
+			        Precio: {{item.precio | currency}} {{item.moneda}}<br>
 			        Contacto: {{item.nombreContacto}} <br/>
 			        
                 </FONT>

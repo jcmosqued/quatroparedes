@@ -12,6 +12,7 @@ angular.module('inmuebles').factory('Inmuebles', ['$resource',
 	}
 ]);
 
+
 /*permite que se pase el valor de la categoria seleccionada en la 
 pagina principal hacia la lista de inmuebles*/
 angular.module('inmuebles').service('categorias', function(){

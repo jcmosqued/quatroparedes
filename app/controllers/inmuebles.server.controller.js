@@ -7,8 +7,12 @@ var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Inmueble = mongoose.model('Inmueble'),
 	fs = require('fs'),
-	_ = require('lodash');
+	_ = require('lodash'),
+	multiparty = require('multiparty'),
+	uuid = require('uuid');
 
+var docsPerPage = 9;
+var anchorId = '';
 
 /**
  * Create a Inmueble
@@ -16,9 +20,6 @@ var mongoose = require('mongoose'),
 exports.create = function(req, res) {
 	var inmueble = new Inmueble(req.body);
 	inmueble.user = req.user;
-		console.log('server');
-		console.log(inmueble);
-
 	inmueble.save(function(err) {
 		if (err) {
 			return res.status(400).send({
@@ -31,6 +32,50 @@ exports.create = function(req, res) {
 };
 
 /**
+ * Create a inmueble with Upload
+ */
+exports.createWithUpload = function(req, res) {
+    var form = new multiparty.Form();
+    form.parse(req, function(err, fields, files) {
+        var file = req.files.file;
+        var inmueble = new Inmueble(req.body.inmueble);
+        inmueble.user = req.user;
+
+        req.files.file.forEach(function (element, index, array){
+        	var tmpPath = element.path;	
+        	var extIndex = tmpPath.lastIndexOf('.');
+        	var extension = (extIndex < 0) ? '' : tmpPath.substr(extIndex);
+	        var fileName = uuid.v4() + extension;
+    	    var destPath = './public/uploads/' + fileName;
+    	    inmueble.image[index] = '/uploads/' + fileName;
+	        var is = fs.createReadStream(tmpPath);
+	        var os = fs.createWriteStream(destPath);
+
+	        if(is.pipe(os)) {
+	            fs.unlink(tmpPath, function (err) { //To unlink the file from temp path after copy
+	                if (err) {
+	                    console.log(err);
+	                }
+	            });
+	        } else
+	            return res.json('Archivo no guardado');
+
+        });   
+////////////////////////////////
+            inmueble.save(function(err) {
+                if (err) {
+                    return res.status(400).send({
+                        message: errorHandler.getErrorMessage(err)
+                    });
+                } else {
+                    res.jsonp(inmueble);
+                }
+            }
+            );
+    });
+
+};
+/**
  * Show the current Inmueble
  */
 exports.read = function(req, res) {
@@ -42,9 +87,7 @@ exports.read = function(req, res) {
  */
 exports.update = function(req, res) {
 	var inmueble = req.inmueble ;
-
 	inmueble = _.extend(inmueble , req.body);
-
 	inmueble.save(function(err) {
 		if (err) {
 			return res.status(400).send({
@@ -61,7 +104,6 @@ exports.update = function(req, res) {
  */
 exports.delete = function(req, res) {
 	var inmueble = req.inmueble ;
-
 	inmueble.remove(function(err) {
 		if (err) {
 			return res.status(400).send({
@@ -77,6 +119,18 @@ exports.delete = function(req, res) {
  * List of Inmuebles
  */
 exports.list = function(req, res) { 
+/*	Inmueble.findPaginated({}, function (err, result) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(result.documents);
+
+		}
+	}, docsPerPage, anchorId).sort('-tipoDestacado');*/
+	
+	
 	Inmueble.find().sort('-tipoDestacado').populate('user').exec(function(err, inmuebles) {
 		if (err) {
 			return res.status(400).send({
@@ -86,6 +140,7 @@ exports.list = function(req, res) {
 			res.jsonp(inmuebles);
 		}
 	});
+	console.log(req.body);
 };
 
 /**

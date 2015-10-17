@@ -3,11 +3,14 @@
 module.exports = function(app) {
 	var users = require('../../app/controllers/users.server.controller');
 	var inmuebles = require('../../app/controllers/inmuebles.server.controller');
-
+	
+	var multiparty = require('connect-multiparty');
+	var multipartMiddleware = multiparty();
+	
 	// Inmuebles Routes
 
-/*	app.route('/inmueblesupload')
-	    .post(users.requiresLogin, multipartyMiddleware, inmuebles.createWithUpload);*/
+	app.route('/inmuebleupload')
+    .post(users.requiresLogin, multipartMiddleware, inmuebles.createWithUpload);
 
 	app.route('/inmuebles')
 		.get(inmuebles.list)

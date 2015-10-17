@@ -4,7 +4,9 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-	Schema = mongoose.Schema;
+	Schema = mongoose.Schema
+var mongoosePages = require('mongoose-pages');
+
 
 /**
  * Inmueble Schema
@@ -29,11 +31,12 @@ var InmuebleSchema = new Schema({
 	nombreContacto:{ type: String, default: '' },
 	telContacto:{ type: String, default: '' },
 	mailContacto:{ type: String, default: '' },
-	image:{ type: Object },
-	imagenes:{type: Object},
+	image:{ type: Array, default:'' },
 	tipoDestacado:{type: Number, default: 0},
 	created: { type: Date, default: Date.now },
 	user: { type: Schema.ObjectId, ref: 'User'}
 });
+
+mongoosePages.anchor(InmuebleSchema);
 
 mongoose.model('Inmueble', InmuebleSchema);

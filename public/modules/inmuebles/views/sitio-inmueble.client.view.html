@@ -34,15 +34,15 @@
                 Tipo de inmueble: {{inmueble.tipo_inmueble}}<br/> 
                 Tipo de transacción: {{inmueble.tipo_trans}}<br/> 
                 Estado: {{inmueble.estado}} <br/> 
-                Ciudad: {{inmueble.ciudad}} 
+                Ciudad: {{inmueble.ciudad}} <br/> 
                 Zona: {{inmueble.zona}} <br/>
-                Colonia: {{inmueble.colonia}} 
+                Colonia: {{inmueble.colonia}} <br/> 
                 Dirección: {{inmueble.direccion}} <br/>
                 Precio: {{inmueble.precio | currency}} {{inmueble.moneda}} <br/>
                 M2 de terreno: {{inmueble.m2terreno}} <br/>
                 M2 de construcción: {{inmueble.m2construccion}} <br/>
-                No. Plantas: {{inmueble.no_plantas}} <br/>e
-                No. Habitaciones: {{inmueble.no_habitaciones}} 
+                No. Plantas: {{inmueble.no_plantas}} <br/>
+                No. Habitaciones: {{inmueble.no_habitaciones}} <br/> 
                 No. Baños: {{inmueble.no_banos}} <br/>
                 No. Cajones: {{inmueble.no_carros}} <br/>
                 Contacto: {{inmueble.nombreContacto}} <br/>
@@ -52,7 +52,7 @@
             </div>
 
             <div class="col-md-7 text-center">    
-              <img class="img-rounded" ng-src="data:image/jepg;base64,{{inmueble.image.base64}}" id="photo-id" width="270" height="270"/><br>
+              <img class="img-rounded" ng-src="{{inmueble.image[0]}}" id="photo-id" width="270" height="270"/><br>
              
               <small>
                 <em class="text-muted">
@@ -91,7 +91,7 @@
             <table>
                 <tr>
                     <th rowspan="2">
-                        <a ng-click="showModal(inmueble)"><img class="img-circle" ng-src="data:image/jpg;base64,{{inmueble.image.base64}}" id="photo-id" width="160" height="160"/>
+                        <a ng-click="showModal(inmueble)"><img class="img-circle" ng-src="{{inmueble.image[0]}}" id="photo-id" width="160" height="160"/>
                     </th>
                     <th><br></th>
                 </tr>

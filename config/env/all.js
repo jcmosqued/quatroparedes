@@ -19,17 +19,19 @@ module.exports = {
 			js: [
 				'public/lib/angular/angular.min.js',
 				'public/lib/angular-resource/angular-resource.min.js', 
-				//'public/lib/angular-cookies/angular-cookies.min.js', 
-				//'public/lib/angular-animate/angular-animate.min.js', 
-				//'public/lib/angular-touch/angular-touch.min.js', 
-				//'public/lib/angular-sanitize/angular-sanitize.min.js', 
+				'public/lib/angular-cookies/angular-cookies.min.js', 
+				'public/lib/angular-animate/angular-animate.min.js', 
+				'public/lib/angular-touch/angular-touch.min.js', 
+				'public/lib/angular-sanitize/angular-sanitize.min.js', 
 				'public/lib/angular-ui-router/release/angular-ui-router.min.js',
 				'public/lib/angular-ui-utils/ui-utils.min.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.min.js',
 				'public/lib/jquery/dist/jquery.min.js',
 				'public/lib/bootstrap/dist/js/bootstrap.min.js',
-	            'public/lib/angular-base64-upload/dist/angular-base64-upload.min.js'
-	            
+	            'public/lib/ng-file-upload/dist/FileAPI.min.js', 
+            	'public/lib/ng-file-upload/dist/ng-file-upload-shim.min.js',
+            	'public/lib/ng-file-upload/dist/ng-file-upload.min.js',
+            	'public/lib/angular-utils-pagination/dirPagination.js'
 			]
 		},
 		css: [

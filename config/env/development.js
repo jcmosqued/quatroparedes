@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-	db: 'mongodb://localhost/quatroperedes-dev',
+	db: 'mongodb://localhost/quatroparedes-dev',
 	app: {
 		title: 'Quatroparedes'
 	},
