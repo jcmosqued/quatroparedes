@@ -5,7 +5,6 @@
  */
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema
-var mongoosePages = require('mongoose-pages');
 
 
 /**
@@ -37,7 +36,5 @@ var InmuebleSchema = new Schema({
 	created: { type: Date, default: Date.now },
 	user: { type: Schema.ObjectId, ref: 'User'}
 });
-
-mongoosePages.anchor(InmuebleSchema);
 
 mongoose.model('Inmueble', InmuebleSchema);

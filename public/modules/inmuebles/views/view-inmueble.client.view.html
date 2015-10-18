@@ -29,7 +29,7 @@
 			    </ol>
 			    <!-- Wrapper for slides -->
 	 
-			    <div class="carousel-inner" role="listbox"   width: "60%" height:"350px">
+			    <div class="carousel-inner" role="listbox"   width: "50%" height:"300px">
 				   	<div class="item active">
 		            	<img ng-src="{{item.image[0]}}" width="200" height="200" class="img-modal">
 		            </div>
@@ -81,7 +81,7 @@
 			    </ol>
 			    <!-- Wrapper for slides -->
 	 
-			    <div class="carousel-inner" role="listbox"   width: "100%" height:"350px">
+			    <div class="carousel-inner" role="listbox"   width: "50%" height:"350px">
 				   	<div class="item active">
 		            	<img ng-src="{{item.image[0]}}" width="200" height="200" class="img-modal">
 		            </div>
@@ -125,32 +125,32 @@
 	    <div class="col-md-12 col-sm-12 linea-separacion">
 	       <div class=" col-md-6 col-sm-6 text-center">
 				<FONT FACE="arial" SIZE=2 COLOR="black">
-			        Tipo de inmueble: {{item.tipo_inmueble}} <br/>
-			        Tipo de transacción: {{item.tipo_trans}} <br/>
+			        <b>Tipo de inmueble: {{item.tipo_inmueble}} <br/>
+			        <b>Tipo de transacción: {{item.tipo_trans}} <br/>
 			        <div data-ng-show="item.user.tipo==='pagosite'">
-			        Dirección: {{item.direccion}} <br/>
-			        Zona: {{item.zona}} <br/>
+			        <b>Dirección: {{item.direccion}} <br/>
+			        <b>Zona: {{item.zona}} <br/>
 			        </div>
-			        Estado: {{item.estado}} <br/>
-			        Ciudad: {{item.ciudad}} <br/>
-			        Colonia: {{item.colonia}} <br/>
-			        Precio: {{item.precio | currency}} {{item.moneda}}<br>
-			        Contacto: {{item.nombreContacto}} <br/>
+			        <b>Estado: {{item.estado}} <br/>
+			        <b>Ciudad: {{item.ciudad}} <br/>
+			        <b>Colonia: {{item.colonia}} <br/>
+			        <b>Precio: {{item.precio | currency}} {{item.moneda}}<br>
+			        <b>Contacto: {{item.nombreContacto}} <br/>
                 </FONT>
 		    </div>   
 		    <div class=" col-md-6 col-sm-6 text-center">
 				<FONT FACE="arial" SIZE=2 COLOR="black">
-					No. Habitaciones: {{item.no_habitaciones}} <br/>
-			        No. Baños: {{item.no_banos}} <br/>
+					<b>No. Habitaciones: {{item.no_habitaciones}} <br/>
+			        <b>No. Baños: {{item.no_banos}} <br/>
 			        <div data-ng-show="item.user.tipo==='pagosite'">
-			        No. Plantas: {{item.no_plantas}} <br/>
-			        No. Cajones: {{item.no_carros}} <br/>
+			        <b>No. Plantas: {{item.no_plantas}} <br/>
+			        <b>No. Cajones: {{item.no_carros}} <br/>
 			        </div>
-			        M2 de terreno: {{item.m2terreno}} <br/>
-			        M2 de construcción: {{item.m2construccion}} <br/>
-                	Teléfono: {{item.telContacto}} <br/>
-                	Correo: {{item.mailContacto}} <br/>
-                	Información Adicional:<br> {{item.infoAdicional}} <br>
+			        <b>M2 de terreno: {{item.m2terreno}} <br/>
+			        <b>M2 de construcción: {{item.m2construccion}} <br/>
+                	<b>Teléfono: {{item.telContacto}} <br/>
+                	<b>Correo: {{item.mailContacto}} <br/>
+                	<b>Información Adicional:<br> {{item.infoAdicional}} <br>
 			    </FONT>
 		    </div> 
 		</div>

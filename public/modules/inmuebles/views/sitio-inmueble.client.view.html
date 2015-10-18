@@ -8,11 +8,14 @@
 <!--Sección 2, portada de sitio-->
 
     <div class="col-lg-12 modal-content text-right">
-        <img ng-src="data:image/jpg;base64,{{inmueble.user.imgPortada.base64}}" width="100%" height="300px">
+        <img ng-src="/uploads/default.jpg" data-ng-if="inmueble.user.imgPortada==''" width="100%" height="300px">
+        <img ng-src="{{inmueble.user.imgPortada}}" data-ng-if="inmueble.user.imgPortada!=''" width="100%" height="300px">
     </div>
 
     <div class="col-lg-3 modal-content text-right capa1" >
-        <img  ng-src="data:image/jpg;base64,{{inmueble.user.imgLogo.base64}}" width="100%" height="180px">
+        
+        <img  ng-src="/uploads/perfil.jpg" data-ng-if="inmueble.user.imgLogo==''"width="100%" height="180px">
+        <img  ng-src="{{inmueble.user.imgLogo}}" data-ng-if="inmueble.user.imgLogo!=''"width="100%" height="180px">
     </div><br>
     <br>
     <div  class="col-lg-12  modal-content"  style="background-color: {{inmueble.user.colorFondo}}"><br><br><br><br></div>

@@ -55,8 +55,8 @@ var UserSchema = new Schema({
 	colorContacto:{type:String, default: '#999'},
 	letraMarco:{type:String, default: '#000'},
 	colorMarco:{type:String, default: '#DCDCDC'},
-	imgPortada:{ type: Object},
-	imgLogo:{ type: Object},
+	imgPortada:{ type: String, default:''},
+	imgLogo:{ type: String, default:''},
 	estatus: {type:String, default: 'activo'},
 });
 

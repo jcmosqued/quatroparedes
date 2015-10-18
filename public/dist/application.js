@@ -4,7 +4,7 @@
 var ApplicationConfiguration = (function() {
 	// Init module configuration options
 	var applicationModuleName = 'Quatroparedes';
-	var applicationModuleVendorDependencies = ['ngResource', 'ui.router', 'ui.bootstrap', 'ui.utils','naif.base64'];
+	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies',  'ngAnimate',  'ngTouch',  'ngSanitize',  'ui.router', 'ui.bootstrap', 'ui.utils', 'ngFileUpload','angularUtils.directives.dirPagination'];
 
 	// Add a new vertical module
 	var registerModule = function(moduleName, dependencies) {
@@ -333,11 +333,27 @@ angular.module('inmuebles').config(['$stateProvider',
 'use strict';
 
 // Inmuebles controller
-angular.module('inmuebles').controller('InmueblesController', ['$scope', '$rootScope', '$modal', 'categorias', 'transacciones', 'item', '$timeout', '$stateParams', '$location', 'Authentication', 'Inmuebles',
-	function($scope, $rootScope, $modal, categorias, transacciones, item, $timeout, $stateParams, $location, Authentication, Inmuebles) {
+angular.module('inmuebles').controller('InmueblesController', ['$scope', '$rootScope', '$modal', 'categorias', 'transacciones', 'item', '$timeout', 'Upload', '$stateParams', '$location', 'Authentication', 'Inmuebles', 
+	function($scope, $rootScope, $modal, categorias, transacciones, item, $timeout, Upload, $stateParams, $location, Authentication, Inmuebles) {
 		$scope.authentication = Authentication;
 		$scope.categoriaActual=categorias.categoriaActual;
 		$scope.transaccionActual=transacciones.transaccionActual;
+            
+/*            $scope.totalItems = 18;
+            $scope.viewby = 9;
+            $scope.currentPage = 1;
+            $scope.itemsPerPage = $scope.viewby;
+            $scope.maxSize = 5;
+
+            $scope.setPage = function (pageNo) {
+                $scope.currentPage = pageNo;
+            };
+
+            $scope.setItemsPerPage = function(num) {
+              $scope.itemsPerPage = num;
+              $scope.currentPage = 1; //reset to first paghe
+            }*/
+
 
             $scope.setCategoria =function(categoria){
 			$scope.categoriaActual=categoria;
@@ -566,8 +582,7 @@ para poder acceder a sus datos*/
 		}
 
 		// Create new Inmueble
-		$scope.create = function() {
-
+		$scope.create = function(image) {
 			// Create new Inmueble object
 			var inmueble = new Inmuebles ({
 				titulo: this.titulo,
@@ -579,21 +594,27 @@ para poder acceder a sus datos*/
 				colonia: this.colonia,
 				direccion: this.direccion,
 				precio: this.precio,
-                        moneda: moneda,
+                        moneda: this.moneda,
                         m2terreno: this.m2terreno,
                         m2construccion: this.m2construccion,
                         no_plantas: this.no_plantas,
 				no_habitaciones: this.no_habitaciones,
 				no_banos: this.no_banos,
 				no_carros: this.no_carros,
-//se obtiene el String base64 de la imagen principal a través del DOM
-                        image: this.image,
-                        imagenes: this.imagenes,
+                        infoAdicional: this.infoAdicional,
+                        nombreContacto: this.nombreContacto,
+                        telContacto: this.telContacto,
+                        mailContacto: this.mailContacto
 			});
 
-      		// Redirect after save
-			inmueble.$save(function(response) {
-				$location.path('inmuebles');
+                  Upload.upload({
+                        url: '/inmuebleupload', 
+                        method: 'POST', 
+                        headers: {'Content-Type': 'multipart/form-data'},
+                        fields: {inmueble: inmueble},
+                        file: image,               
+                    }).success(function (response, status) {
+                          $location.path('inmuebles/' + response._id);
 
 				// Clear form fields
 				$scope.titulo = '';
@@ -611,18 +632,20 @@ para poder acceder a sus datos*/
 				$scope.no_habitaciones = '';
 				$scope.no_banos = '';
 				$scope.no_carros = '';
+                        $scope.infoAdicional="";
+                        $scope.nombreContacto="";
+                        $scope.telContacto="";
+                        $scope.mailContacto="";
 				
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
 		};
 
-
 		// Remove existing Inmueble
 		$scope.remove = function(inmueble) {
 			if ( inmueble ) { 
 				inmueble.$remove();
-
 				for (var i in $scope.inmuebles) {
 					if ($scope.inmuebles [i] === inmueble) {
 						$scope.inmuebles.splice(i, 1);
@@ -637,9 +660,20 @@ para poder acceder a sus datos*/
 
 		// Update existing Inmueble
 		$scope.update = function() {
+                  var image= this.image;
 			var inmueble = $scope.inmueble;
-                  console.log(inmueble);
-			inmueble.$update(function() {
+                  console.log(image);
+			//inmueble.$update(function() {
+                  Upload.upload({
+                        url: '/inmuebles/' + inmueble._id, 
+                        method: 'PUT', 
+                        headers: {'Content-Type': 'multipart/form-data'},
+                        fields: {inmueble: inmueble},
+                        file: image,               
+                    }).success(function (response, status) {
+                        console.log('response');
+                        console.log('status');
+
 				$location.path('inmueblesMe');
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
@@ -649,7 +683,6 @@ para poder acceder a sus datos*/
             // Update existing Inmueble
             $scope.updateDestacado = function() {
                   var inmueble = $scope.inmueble;
-
                   inmueble.$update(function() {
                         $location.path('inmueblesDestacados');
                   }, function(errorResponse) {
@@ -668,13 +701,10 @@ para poder acceder a sus datos*/
 				inmuebleId: $stateParams.inmuebleId
 			});
 			//$scope.inmueble= inmueble.inmuebleActual;
-
 		};
 
 
             $scope.load = function(lugar) {
-                        
-
             if (GBrowserIsCompatible()) {
                   var map = new GMap2(document.getElementById("map"));
                   map.setCenter(new GLatLng(0,0), 0);
@@ -700,14 +730,11 @@ para poder acceder a sus datos*/
                         }
                   });
                   var center = new GMarker(map.getCenter());
-            center.title = "Centro del mapa";
+                  center.title = "Centro del mapa";
                   map.addOverlay(center);
                   map.openInfoWindowHtml(center.getPoint(), center.title);
             }
       };
-
-
-
 	}
 ]);
 
@@ -731,6 +758,7 @@ angular.module('inmuebles').factory('Inmuebles', ['$resource',
 		});
 	}
 ]);
+
 
 /*permite que se pase el valor de la categoria seleccionada en la 
 pagina principal hacia la lista de inmuebles*/

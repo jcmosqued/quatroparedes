@@ -7,7 +7,7 @@ angular.module('inmuebles').controller('InmueblesController', ['$scope', '$rootS
 		$scope.categoriaActual=categorias.categoriaActual;
 		$scope.transaccionActual=transacciones.transaccionActual;
             
-            $scope.totalItems = 18;
+/*            $scope.totalItems = 18;
             $scope.viewby = 9;
             $scope.currentPage = 1;
             $scope.itemsPerPage = $scope.viewby;
@@ -20,7 +20,7 @@ angular.module('inmuebles').controller('InmueblesController', ['$scope', '$rootS
             $scope.setItemsPerPage = function(num) {
               $scope.itemsPerPage = num;
               $scope.currentPage = 1; //reset to first paghe
-            }
+            }*/
 
 
             $scope.setCategoria =function(categoria){
@@ -310,27 +310,6 @@ para poder acceder a sus datos*/
 			});
 		};
 
-/*                $scope.doTimeout = function(image) {
-                    $timeout( function() {
-                            var fileReader = new FileReader();
-                            fileReader.readAsDataURL(image);
-                            fileReader.onload = function(e) {
-                                $timeout(function() {
-                                    image.dataUrl = e.target.result;
-                                });
-                            };
-                        });
-                };
-
-
-                $scope.generateThumb = function(image) {
-                if (image) {
-                    if ($scope.fileReaderSupported && image.type.indexOf('image') > -1) {
-                        $scope.doTimeout(image);
-                      }
-                  }
-               };*/
-
 		// Remove existing Inmueble
 		$scope.remove = function(inmueble) {
 			if ( inmueble ) { 
@@ -342,15 +321,27 @@ para poder acceder a sus datos*/
 				}
 			} else {
 				$scope.inmueble.$remove(function() {
-					$location.path('inmuebles');
+					$location.path('inmueblesMe');
 				});
 			}
 		};
 
 		// Update existing Inmueble
 		$scope.update = function() {
+                  var image= this.image;
 			var inmueble = $scope.inmueble;
-			inmueble.$update(function() {
+                  console.log(image);
+			//inmueble.$update(function() {
+                  Upload.upload({
+                        url: '/inmuebles/' + inmueble._id, 
+                        method: 'PUT', 
+                        headers: {'Content-Type': 'multipart/form-data'},
+                        fields: {inmueble: inmueble},
+                        file: image,               
+                    }).success(function (response, status) {
+                        console.log('response');
+                        console.log('status');
+
 				$location.path('inmueblesMe');
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
@@ -370,8 +361,6 @@ para poder acceder a sus datos*/
 		// Find a list of Inmuebles
 		$scope.find = function() {
 			$scope.inmuebles = Inmuebles.query();
-                  $scope.totalItems = 18;
-                  
 		};
 
 		// Find existing Inmueble

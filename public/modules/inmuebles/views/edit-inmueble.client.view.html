@@ -113,7 +113,13 @@
                         <input type="number" data-ng-model="inmueble.no_carros" id="no_carros" class="form-control" min = "1" max = "10">
                     </div>
 
-                    <label class="control-label" for="image">Imagen principal</label>
+                    <label class="control-label" for="image">Seleccionar fotos</label><br>
+                    <label >*** Solo puedes subir 5 imagenes</label><br>
+                    <div class="controls">
+                        <input id="image" type="file" ngf-select data-ng-model="image" name="image" accept="image/*" ngf-resize="{width: 300, height: 300, quality: 1}" ngf-multiple="true">
+                    </div>
+
+<!--                     <label class="control-label" for="image">Imagen principal</label>
                     <div class="controls">
                         <input id="image" type="file" data-ng-model="inmueble.image" name="image" base-sixty-four-input accept="image/*" maxsize="100">
                     </div>
@@ -121,7 +127,7 @@
                     <label class="control-label" for="imagenes">Imagenes adicionales</label>
                     <div class="controls">
                          <input id="imagenes" type="file" data-ng-model="inmueble.imagenes" name="imagenes" base-sixty-four-input accept="image/*" multiple maxsize="5000">
-                    </div>
+                    </div> -->
 
                     <label class="control-label" for="nombreContacto">Nombre del contacto:</label>
                     <input type="text" data-ng-model="inmueble.nombreContacto" id="nombreContacto" class="form-control" placeholder="Nombre del contacto">

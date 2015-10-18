@@ -10,7 +10,7 @@ module.exports = function(app) {
 	// Inmuebles Routes
 
 	app.route('/inmuebleupload')
-    .post(users.requiresLogin, multipartMiddleware, inmuebles.createWithUpload);
+    	.post(users.requiresLogin, multipartMiddleware, inmuebles.createWithUpload);
 
 	app.route('/inmuebles')
 		.get(inmuebles.list)
@@ -18,7 +18,7 @@ module.exports = function(app) {
 
 	app.route('/inmuebles/:inmuebleId')
 		.get(inmuebles.read)
-		.put(users.requiresLogin,  inmuebles.update)
+		.put(users.requiresLogin, multipartMiddleware, inmuebles.update)
 		.delete(users.requiresLogin, inmuebles.hasAuthorization, inmuebles.delete);
 
 	// Finish by binding the Inmueble middleware
