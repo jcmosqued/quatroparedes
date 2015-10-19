@@ -40,7 +40,7 @@ exports.createWithUpload = function(req, res) {
         inmueble.user = req.user;
 
         req.files.file.forEach(function (element, index, array){
-        	if (index <=4){
+        	if (index <=9){
 	        	var tmpPath = element.path;	
 	        	var extIndex = tmpPath.lastIndexOf('.');
 	        	var extension = (extIndex < 0) ? '' : tmpPath.substr(extIndex);

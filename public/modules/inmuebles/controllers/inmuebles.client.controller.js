@@ -1,27 +1,11 @@
 'use strict';
 
 // Inmuebles controller
-angular.module('inmuebles').controller('InmueblesController', ['$scope', '$rootScope', '$modal', 'categorias', 'transacciones', 'item', '$timeout', 'Upload', '$stateParams', '$location', 'Authentication', 'Inmuebles', 
+angular.module('inmuebles').controller('InmueblesController', ['$scope', '$rootScope', '$modal', 'categorias', 'transacciones', 'item', '$timeout', 'Upload', '$stateParams', '$location', 'Authentication', 'Inmuebles',
 	function($scope, $rootScope, $modal, categorias, transacciones, item, $timeout, Upload, $stateParams, $location, Authentication, Inmuebles) {
 		$scope.authentication = Authentication;
 		$scope.categoriaActual=categorias.categoriaActual;
 		$scope.transaccionActual=transacciones.transaccionActual;
-            
-/*            $scope.totalItems = 18;
-            $scope.viewby = 9;
-            $scope.currentPage = 1;
-            $scope.itemsPerPage = $scope.viewby;
-            $scope.maxSize = 5;
-
-            $scope.setPage = function (pageNo) {
-                $scope.currentPage = pageNo;
-            };
-
-            $scope.setItemsPerPage = function(num) {
-              $scope.itemsPerPage = num;
-              $scope.currentPage = 1; //reset to first paghe
-            }*/
-
 
             $scope.setCategoria =function(categoria){
 			$scope.categoriaActual=categoria;
@@ -412,3 +396,24 @@ angular.module('inmuebles').controller('myModalController', ['$scope', '$rootSco
 	}
 	]);
 
+angular.module('inmuebles').filter('PrecioEntre', function () {
+  return function (items, precioMinimo, precioMaximo) {
+      var filtered = [];
+      if (precioMinimo!=undefined && precioMaximo!=undefined && precioMinimo!="" && precioMaximo!=""){
+            for (var i = 0; i < items.length; i++) {  
+                  var item = items[i];
+                  if (item.precio >precioMinimo && item.precio< precioMaximo){
+                        filtered.push(item);
+                  }
+            }
+      }
+      else
+      {
+            for (var i = 0; i < items.length; i++) {  
+                  var item = items[i];
+                        filtered.push(item);
+            }  
+      }
+       return filtered;
+  };
+});

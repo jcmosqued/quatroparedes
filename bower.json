@@ -17,6 +17,9 @@
     "angular-ui-bootstrap": "~0.13.0",
     "angular-base64-upload": "~0.1.11",
     "ng-file-upload": "~9.0.9",
-    "angular-utils-pagination":"0.8.2"
+    "angular-utils-pagination": "~0.8.2"
+  },
+  "resolutions": {
+    "angular": "~1.2"
   }
 }

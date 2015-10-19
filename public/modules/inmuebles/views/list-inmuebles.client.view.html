@@ -66,7 +66,7 @@
         
         <label>Tipo de inmueble: <br>
             <select id="inmCategoria" ng-model="categoriaActual" class="form-control">
-                <option value=""></option>
+                <option value="" selected></option>
                 <option value="Casa">Casa</option>
                 <option value="Departamento">Departamento</option>
                 <option value="Oficina">Oficina</option>
@@ -81,7 +81,7 @@
 
         <label>Tipo de transacción:<br>
             <select id="inmTransaccion" ng-model="transaccionActual" class="form-control">
-                <option value=""></option>
+                <option value="" selected></option>
                 <option value="Venta">Venta</option>
                 <option value="Renta">Renta</option>
                 <option value="Traspaso">Traspaso</option>
@@ -100,8 +100,9 @@
         </label><br>
 
 
-        <label>Zona: <br>
+        <label class="control-label" >Zona: <br>
             <select ng-model="Zona" class="form-control">
+                <option value="" selected></option>
                 <option value="Norte">Norte</option>
                 <option value="Sur">Sur</option>
                 <option value="Centro">Centro</option>
@@ -109,12 +110,37 @@
                 <option value="Oeste">Oeste</option>
             </select>
         </label><br>
-        </label>
+
         <label>Precio: <br>
-            <input id="inm" ng-model="Precio">
-        </label>
+          De:
+          <select ng-model="precioMinimo" class="form-control">
+              <option value="" selected></option>
+              <option value="1000">1,000</option>
+              <option value="10000">10,000</option>
+              <option value="100000">100,000</option>
+              <option value="1000000">1,000,000</option>
+              <option value="10000000">10,000,000</option>
+          </select>
+            Hasta:
+          <select ng-model="precioMaximo" class="form-control">
+              <option value="" selected></option>
+              <option value="2000">2,000</option>
+              <option value="20000">20,000</option>
+              <option value="200000">200,000</option>
+              <option value="2000000">2,000,000</option>
+              <option value="20000000">20,000,000</option>
+          </select>        </label> <br> 
+
+        <label class="control-label">Moneda: <br>
+          <select ng-model="moneda" class="form-control">
+              <option value="MNX">Pesos</option>
+              <option value="USD">Dólares</option>
+              <option value="EUR">Euros</option>
+          </select>
+        </label> <br>
+
         <label>No. de plantas: <br>
-            <input type="number" ng-model="noPlantas" min="1">
+            <input type="number" ng-model="noPlantas" class="form-control">
         </label> <br>
         <br>
 
@@ -124,18 +150,17 @@
            <img src="modules/core/img/GIF_3.gif" width="250px" height="250px" marginwidth="0" scrolling="yes" frameborder="0"><br><br>
 
 
-
           </div><br>
         <!-- fin de seccion de publicidad -->
 
            </div>
 
     <!-- Inmuebles  | orderBy:['-tipoDestacado', '-user.tipo']-->
-    <h4>Mostrando {{(inmuebles | filter:{tipo_inmueble: categoriaActual,  tipo_trans: transaccionActual, precio:Precio, estado: estado.valor, ciudad: ciudad.nombre, zona: Zona, no_plantas: noPlantas}).length}} de {{inmuebles.length}} registros con tus criterios de búsqueda</h4>
+    <h4>Mostrando {{(inmuebles | PrecioEntre: precioMinimo: precioMaximo | filter:{tipo_inmueble: categoriaActual,  tipo_trans: transaccionActual, precio:Precio, estado: estado.valor, ciudad: ciudad.nombre, zona: Zona, no_plantas: noPlantas, moneda: moneda}).length}} de {{inmuebles.length}} registros con tus criterios de búsqueda</h4>
     <div class="col-md-9">
-        <div class="col-md-4" dir-paginate="inmueble in inmuebles | filter :{tipo_inmueble: categoriaActual,  tipo_trans: transaccionActual, no_plantas: noPlantas, estado: estado.valor, ciudad: ciudad.nombre, zona: Zona, precio:Precio, no_plantas: noPlantas} | itemsPerPage: 9 | orderBy:['-tipoDestacado', '-user.tipo']">
+        <div class="col-md-4" dir-paginate="inmueble in inmuebles | PrecioEntre: precioMinimo: precioMaximo |filter :{tipo_inmueble: categoriaActual,  tipo_trans: transaccionActual,  estado: estado.valor, ciudad: ciudad.nombre, zona: Zona, no_plantas: noPlantas, moneda: moneda} | itemsPerPage: 9 | orderBy:['-tipoDestacado', '-user.tipo']">
 
-        <table data-ng-show="inmueble.user.estatus==='activo'"><br>
+        <table data-ng-show="inmueble.user.estatus==='activo' "><br>
             <tr class="img-thumbnail">        
             <!-- Sección ícono destacado-->
                  <div class="col-md-10  text-lefth capa2" data-ng-hide="inmueble.tipoDestacado==0">
@@ -161,7 +186,7 @@
 
                         <FONT FACE="arial" SIZE=2 COLOR="gray">
                         Tipo de inmueble: {{inmueble.tipo_inmueble}} <br> 
-                        Precio: {{inmueble.precio | currency}} {{inmueble.moneda}}<br>
+                        Precio: {{inmueble.precio | currency }} {{inmueble.moneda}}<br>
                         </FONT>
                 
                         <div class="coll-sm-12">
