@@ -28,9 +28,9 @@ module.exports = {
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.min.js',
 				'public/lib/jquery/dist/jquery.min.js',
 				'public/lib/bootstrap/dist/js/bootstrap.min.js',
-	            'public/lib/ng-file-upload/dist/FileAPI.min.js', 
-            	'public/lib/ng-file-upload/dist/ng-file-upload-shim.min.js',
-            	'public/lib/ng-file-upload/dist/ng-file-upload.min.js',
+	            'public/lib/ng-file-upload/FileAPI.min.js', 
+            	'public/lib/ng-file-upload/ng-file-upload-shim.min.js',
+            	'public/lib/ng-file-upload/ng-file-upload.min.js',
             	'public/lib/angular-utils-pagination/dirPagination.js'
 			]
 		},
