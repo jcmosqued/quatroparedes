@@ -333,27 +333,11 @@ angular.module('inmuebles').config(['$stateProvider',
 'use strict';
 
 // Inmuebles controller
-angular.module('inmuebles').controller('InmueblesController', ['$scope', '$rootScope', '$modal', 'categorias', 'transacciones', 'item', '$timeout', 'Upload', '$stateParams', '$location', 'Authentication', 'Inmuebles', 
+angular.module('inmuebles').controller('InmueblesController', ['$scope', '$rootScope', '$modal', 'categorias', 'transacciones', 'item', '$timeout', 'Upload', '$stateParams', '$location', 'Authentication', 'Inmuebles',
 	function($scope, $rootScope, $modal, categorias, transacciones, item, $timeout, Upload, $stateParams, $location, Authentication, Inmuebles) {
 		$scope.authentication = Authentication;
 		$scope.categoriaActual=categorias.categoriaActual;
 		$scope.transaccionActual=transacciones.transaccionActual;
-            
-/*            $scope.totalItems = 18;
-            $scope.viewby = 9;
-            $scope.currentPage = 1;
-            $scope.itemsPerPage = $scope.viewby;
-            $scope.maxSize = 5;
-
-            $scope.setPage = function (pageNo) {
-                $scope.currentPage = pageNo;
-            };
-
-            $scope.setItemsPerPage = function(num) {
-              $scope.itemsPerPage = num;
-              $scope.currentPage = 1; //reset to first paghe
-            }*/
-
 
             $scope.setCategoria =function(categoria){
 			$scope.categoriaActual=categoria;
@@ -653,7 +637,7 @@ para poder acceder a sus datos*/
 				}
 			} else {
 				$scope.inmueble.$remove(function() {
-					$location.path('inmuebles');
+					$location.path('inmueblesMe');
 				});
 			}
 		};
@@ -744,7 +728,49 @@ angular.module('inmuebles').controller('myModalController', ['$scope', '$rootSco
 	}
 	]);
 
+angular.module('inmuebles').filter('PrecioEntre', function () {
+  return function (items, precioMinimo, precioMaximo) {
+      var filtered = [];
+      if (precioMinimo!=undefined && precioMaximo!=undefined && precioMinimo!="" && precioMaximo!=""){
+            for (var i = 0; i < items.length; i++) {  
+                  var item = items[i];
+                  if (item.precio >precioMinimo && item.precio< precioMaximo){
+                        filtered.push(item);
+                  }
+            }
+      }
+      else
+      {
+            for (var i = 0; i < items.length; i++) {  
+                  var item = items[i];
+                        filtered.push(item);
+            }  
+      }
+       return filtered;
+  };
+});
+(function () {
+    'use strict';
 
+    var filterModule = angular.module('cmFilter', []);
+    
+    filterModule.filter('MayorX', function () {
+        return function (inmuebles, precio) {
+            var result = [];
+            if (!precio) precio = 0;
+
+            if (inmuebles) {
+                inmuebles.forEach(function (inmueble) {
+                    if (inmueble.Edad > precio) {
+                        result.push(inmueble);
+                    }
+                });
+            }
+
+            return result;
+        }
+    });
+}());
 'use strict';
 
 //Inmuebles service used to communicate Inmuebles REST endpoints
@@ -758,7 +784,6 @@ angular.module('inmuebles').factory('Inmuebles', ['$resource',
 		});
 	}
 ]);
-
 
 /*permite que se pase el valor de la categoria seleccionada en la 
 pagina principal hacia la lista de inmuebles*/
