@@ -45,10 +45,26 @@ angular.module('usuarios').controller('UsuariosController', ['$scope', '$statePa
 			var usuario = $scope.usuario;
 			
 			usuario.$update(function() {
-				$location.path('usuarios');
+				$location.path('inmuebles/' + response._id);
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
+
+/*			var usuario = $scope.usuario;
+			Upload.upload({
+		        url: 'usuariosSite/' + usuario._id, 
+                method: 'PUT', 
+                headers: {'Content-Type': 'multipart/form-data'},
+                fields: {usuario: usuario},
+                file: [this.imgPortada,this.imgLogo]
+			}).success(function (response, status) {
+                          $location.path('inmuebles/' + response._id);
+                  }, function(errorResponse) {
+                        $scope.error = errorResponse.data.message;
+                  });
+            };*/
+
+			
 		};
 
 		// Update existing Usuario

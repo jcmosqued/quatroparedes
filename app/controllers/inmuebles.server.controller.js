@@ -85,55 +85,40 @@ exports.read = function(req, res) {
  * Update a Inmueble
  */
 exports.update = function(req, res) {
+	var inmueble = req.inmueble ;
+	inmueble = _.extend(inmueble , req.body.inmueble);
+/*	var file = req.files.file;
+////// Guarda las nuevas imagenes
+    req.files.file.forEach(function (element, index, array){
+    	if (index <=9){
+        	var tmpPath = element.path;	
+        	var extIndex = tmpPath.lastIndexOf('.');
+        	var extension = (extIndex < 0) ? '' : tmpPath.substr(extIndex);
+	        var fileName = uuid.v4() + extension;
+    	    var destPath = './public/uploads/' + fileName;
+    	    inmueble.image[index] = '/uploads/' + fileName;
+	        var is = fs.createReadStream(tmpPath);
+	        var os = fs.createWriteStream(destPath);
+	        if(is.pipe(os)) {
+	            fs.unlink(tmpPath, function (err) { //To unlink the file from temp path after copy
+	                if (err) {
+	                    console.log(err);
+	                }
+	            });
+	        } else
+	            return res.json('Archivo no guardado');
+        }
+    }); 
 
-/*    var form = new multiparty.Form();
-    form.parse(req, function(err, fields, files) {
-        var file = req.files.file;
-        var inmueble = new Inmueble(req.body.inmueble);
-        inmueble.user = req.inmueble.user;
-        //inmueble.user.username=req.user.username;
-        console.log(req.inmueble);
-
-        
-        req.files.file.forEach(function (element, index, array){
-        	if (index <=4){
-	        	var tmpPath = element.path;	
-	        	var extIndex = tmpPath.lastIndexOf('.');
-	        	var extension = (extIndex < 0) ? '' : tmpPath.substr(extIndex);
-		        var fileName = uuid.v4() + extension;
-	    	    var destPath = './public/uploads/' + fileName;
-	    	    inmueble.image[index] = '/uploads/' + fileName;
-		        var is = fs.createReadStream(tmpPath);
-		        var os = fs.createWriteStream(destPath);
-
-		        if(is.pipe(os)) {
-		            fs.unlink(tmpPath, function (err) { //To unlink the file from temp path after copy
+    /////Elimina los archivos anteriores
+	req.body.inmueble.image.forEach(function (element, index, array){
+		fs.unlink('./public' + req.body.inmueble.image[index], function (err) { //To unlink the file from temp path after copy
 		                if (err) {
 		                    console.log(err);
 		                }
-		            });
-		        } else
-		            return res.json('Archivo no guardado');
-	        }
-        }); 
+		});
+	});*/
 
-////////////////////////////////
-            inmueble.save(function(err) {
-                if (err) {
-                	console.log();
-                    return res.status(400).send({
-                        message: errorHandler.getErrorMessage(err)
-                    });
-                } else {
-                	console.log('paso');
-                    res.jsonp(inmueble);
-                }
-            }
-            );
-    });*/
-
-/*	var inmueble = req.inmueble ;
-	inmueble = _.extend(inmueble , req.body);
 	inmueble.save(function(err) {
 		if (err) {
 			return res.status(400).send({
@@ -142,7 +127,9 @@ exports.update = function(req, res) {
 		} else {
 			res.jsonp(inmueble);
 		}
-	});*/
+	});
+	console.log(inmueble);
+
 };
 
 /**
@@ -163,7 +150,6 @@ exports.delete = function(req, res) {
 	})
 //Elimina archivos
 	inmueble.image.forEach(function (element, index, array){
-		console.log('./public' + inmueble.image[index]);
 		fs.unlink('./public' + inmueble.image[index], function (err) { //To unlink the file from temp path after copy
 		                if (err) {
 		                    console.log(err);

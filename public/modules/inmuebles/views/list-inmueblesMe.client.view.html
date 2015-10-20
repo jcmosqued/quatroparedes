@@ -47,6 +47,7 @@
         
         <label>Tipo de inmueble: <br>
             <select ng-model="categoriaActual" class="form-control">
+                <option value="" selected></option>
                 <option value="Casa">Casa</option>
                 <option value="Departamento">Departamento</option>
                 <option value="Oficina">Oficina</option>
@@ -61,6 +62,7 @@
 
         <label>Tipo de transacción:<br>
             <select ng-model="transaccionActual" class="form-control">
+                <option value="" selected></option>
                 <option value="Venta">Venta</option>
                 <option value="Renta">Renta</option>
                 <option value="Traspaso">Traspaso</option>
@@ -76,11 +78,11 @@
     <!-- Inmuebles -->
   
     <div class="col-md-9">
-        <div class="col-md-4" data-ng-repeat="inmueble in inmuebles | filter :authentication.user._id" >
+        <div class="col-md-4" data-ng-repeat="inmueble in inmuebles |filter :{tipo_inmueble: categoriaActual,  tipo_trans: transaccionActual}" >
 
         <table>
             <tr>
-                <td>
+                <td data-ng-show="authentication.user.displayName==='{{inmueble.user.displayName}}'">
                 <br>        
                     <div class="img-thumbnail text-center" >            
                         <FONT FACE="arial" SIZE=2 COLOR="gray">

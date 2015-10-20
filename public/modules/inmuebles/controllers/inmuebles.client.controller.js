@@ -310,27 +310,22 @@ para poder acceder a sus datos*/
 			}
 		};
 
-		// Update existing Inmueble
-		$scope.update = function() {
-                  var image= this.image;
-			var inmueble = $scope.inmueble;
-                  console.log(image);
-			//inmueble.$update(function() {
+            // Update existing Inmueble
+            $scope.update = function() {
+                  
+                  var inmueble = $scope.inmueble;
                   Upload.upload({
-                        url: '/inmuebles/' + inmueble._id, 
+                        url: 'inmuebles/' + inmueble._id, 
                         method: 'PUT', 
                         headers: {'Content-Type': 'multipart/form-data'},
                         fields: {inmueble: inmueble},
-                        file: image,               
+                        file: this.image,               
                     }).success(function (response, status) {
-                        console.log('response');
-                        console.log('status');
-
-				$location.path('inmueblesMe');
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
-		};
+                          $location.path('inmueblesMe');
+                  }, function(errorResponse) {
+                        $scope.error = errorResponse.data.message;
+                  });
+            };
 
             // Update existing Inmueble
             $scope.updateDestacado = function() {
