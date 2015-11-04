@@ -46,62 +46,67 @@ exports.update = function(req, res) {
 	usuario = _.extend(usuario , req.body.usuario);
 	console.log(req.files);
 	var file = req.files.file;
-
+	console.log(file);
 ////// Guarda las nuevas imagenes
-    req.files.file.forEach(function (element, index, array){
-    	if (index ==0){
-        	var tmpPath = element.path;	
-        	var extIndex = tmpPath.lastIndexOf('.');
-        	var extension = (extIndex < 0) ? '' : tmpPath.substr(extIndex);
-	        var fileName = uuid.v4() + extension;
-    	    var destPath = './public/uploads/' + fileName;
-    	    usuario.imgPortada = '/uploads/' + fileName;
-	        var is = fs.createReadStream(tmpPath);
-	        var os = fs.createWriteStream(destPath);
-	        if(is.pipe(os)) {
-	            fs.unlink(tmpPath, function (err) { //To unlink the file from temp path after copy
-	                if (err) {
-	                    console.log(err);
-	                }
-	            });
-	        } else
-	            return res.json('Archivo no guardado');
-        }
+	if (file != null){
+	    req.files.file.forEach(function (element, index, array){
+	    	if (index ==0){
+	        	var tmpPath = element.path;	
+	        	var extIndex = tmpPath.lastIndexOf('.');
+	        	var extension = (extIndex < 0) ? '' : tmpPath.substr(extIndex);
+		        var fileName = uuid.v4() + extension;
+	    	    var destPath = './public/uploads/' + fileName;
+	    	    usuario.imgPortada = '/uploads/' + fileName;
+		        var is = fs.createReadStream(tmpPath);
+		        var os = fs.createWriteStream(destPath);
+		        if(is.pipe(os)) {
+		            fs.unlink(tmpPath, function (err) { //To unlink the file from temp path after copy
+		                if (err) {
+		                    console.log(err);
+		                }
+		            });
+		        } else
+		            return res.json('Archivo no guardado');
+	        }
 
-    	if (index ==1){
-        	var tmpPath = element.path;	
-        	var extIndex = tmpPath.lastIndexOf('.');
-        	var extension = (extIndex < 0) ? '' : tmpPath.substr(extIndex);
-	        var fileName = uuid.v4() + extension;
-    	    var destPath = './public/uploads/' + fileName;
-    	    usuario.imgLogo = '/uploads/' + fileName;
-	        var is = fs.createReadStream(tmpPath);
-	        var os = fs.createWriteStream(destPath);
-	        if(is.pipe(os)) {
-	            fs.unlink(tmpPath, function (err) { //To unlink the file from temp path after copy
-	                if (err) {
-	                    console.log(err);
-	                }
-	            });
-	        } else
-	            return res.json('Archivo no guardado');
-        }
+	    	if (index ==1){
+	        	var tmpPath = element.path;	
+	        	var extIndex = tmpPath.lastIndexOf('.');
+	        	var extension = (extIndex < 0) ? '' : tmpPath.substr(extIndex);
+		        var fileName = uuid.v4() + extension;
+	    	    var destPath = './public/uploads/' + fileName;
+	    	    usuario.imgLogo = '/uploads/' + fileName;
+		        var is = fs.createReadStream(tmpPath);
+		        var os = fs.createWriteStream(destPath);
+		        if(is.pipe(os)) {
+		            fs.unlink(tmpPath, function (err) { //To unlink the file from temp path after copy
+		                if (err) {
+		                    console.log(err);
+		                }
+		            });
+		        } else
+		            return res.json('Archivo no guardado');
+	        }
 
 
-    });
+	    });
 
-    /////Elimina los archivos anteriores
-	fs.unlink('./public' + req.body.usuario.imgPortada, function (err) { //To unlink the file from temp path after copy
-	                if (err) {
-	                    console.log(err);
-	                }
-	});
-	fs.unlink('./public' + req.body.usuario.imgLogo, function (err) { //To unlink the file from temp path after copy
-	                if (err) {
-	                    console.log(err);
-	                }
-	});
-	
+	    /////Elimina los archivos anteriores
+	    if (req.body.usuario.imgPortada != 'uploads/defaultP.jpg'){
+			fs.unlink('./public' + req.body.usuario.imgPortada, function (err) { //To unlink the file from temp path after copy
+			                if (err) {
+			                    console.log(err);
+			                }
+			});
+		};
+		if (req.body.usuario.imgPortada != 'uploads/defaultL.jpg'){
+			fs.unlink('./public' + req.body.usuario.imgLogo, function (err) { //To unlink the file from temp path after copy
+			                if (err) {
+			                    console.log(err);
+			                }
+			});
+		};
+	};
 	
 	//inmueble.update ()
 	usuario.save(function(err) {
