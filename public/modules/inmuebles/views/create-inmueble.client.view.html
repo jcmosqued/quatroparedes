@@ -15,112 +15,149 @@
         <form id="create" name ="inmuebleForm" class="form-horizontal" enctype="multipart/form-data">
             <fieldset>
             Los campos con asterico (*) son obligatorios <br>                
+                <div class="form-group" ng-class ="{'has-error':inmuebleForm.titulo.$invalid && inmuebleForm.titulo.$dirty}">
                     <label class="control-label" for="titulo">* Título: </label>
-                    <input type="text" data-ng-model="titulo" id="titulo" class="form-control" placeholder="Agrega un título de máximo 25 caracteres" maxlength="25" required>
+                    <input type="text" data-ng-model="titulo" id="titulo" name="titulo" class="form-control" placeholder="Agrega un título de máximo 25 caracteres" maxlength="25" ng-required>
+                    <span class="help-block" ng-show ="inmuebleForm.titulo.$invalid && inmuebleForm.titulo.$dirty">El título es requerido</span>
+                </div>
                
-                
-                <label class="control-label" for="tipo_trans">* Tipo de inmueble:</label>
-                <select ng-model="tipo_inmueble" id="tipo_inmueble" class="form-control" placeholder="Tipo de inmueble" required>
-                    <option value=""> </option>
-                    <option value="Casa">Casa</option>
-                    <option value="Departamento">Departamento</option>
-                    <option value="Oficina">Oficina</option>
-                    <option value="Penthouse">Penthouse</option>
-                    <option value="Loft">Loft</option>
-                    <option value="Terreno">Terreno</option>
-                    <option value="Bodega">Bodega</option>
-                    <option value="Local">Local</option>
-                    <option value="Otros">Otros</option>
-                </select>
+                <div class="form-group" ng-class ="{'has-error':inmuebleForm.tipo_inmueble.$invalid && inmuebleForm.tipo_inmueble.$dirty}">
+                    <label class="control-label" for="tipo_trans">* Tipo de inmueble:</label>
+                    <select ng-model="tipo_inmueble" id="tipo_inmueble" name = "tipo_inmueble" class="form-control" placeholder="Tipo de inmueble" required>
+                        <option value=""> </option>
+                        <option value="Casa">Casa</option>
+                        <option value="Departamento">Departamento</option>
+                        <option value="Oficina">Oficina</option>
+                        <option value="Penthouse">Penthouse</option>
+                        <option value="Loft">Loft</option>
+                        <option value="Terreno">Terreno</option>
+                        <option value="Bodega">Bodega</option>
+                        <option value="Local">Local</option>
+                        <option value="Otros">Otros</option>
+                    </select>
+                </div>
 
-                <label class="control-label" for="tipo_trans">* Tipo de transacción:</label>
-                <select ng-model="tipo_trans" id="tipo_trans" class="form-control" required>
-                    <option value=""> </option>
-                    <option value="Venta">Venta</option>
-                    <option value="Renta">Renta</option>
-                    <option value="Traspaso">Traspaso</option>
-                </select>
+                <div class="form-group" ng-class ="{'has-error':inmuebleForm.tipo_trans.$invalid && inmuebleForm.tipo_trans.$dirty}">
+                    <label class="control-label" for="tipo_trans">* Tipo de transacción:</label>
+                    <select ng-model="tipo_trans" id="tipo_trans" name="tipo_trans" class="form-control" required>
+                        <option value=""> </option>
+                        <option value="Venta">Venta</option>
+                        <option value="Renta">Renta</option>
+                        <option value="Traspaso">Traspaso</option>
+                    </select>
+                </div>
                 
-                <label class="control-label" for="direccion">* Dirección:</label>
-                <input type="text" data-ng-model="direccion" id="direccion" class="form-control" placeholder="Dirección" required>
+                <div class="form-group" ng-class ="{'has-error':inmuebleForm.direccion.$invalid && inmuebleForm.direccion.$dirty}">
+                    <label class="control-label" for="direccion">* Dirección:</label>
+                    <input type="text" data-ng-model="direccion" id="direccion" name="direccion" class="form-control" placeholder="Dirección" required>
+                </div>
                     
-                <label class="control-label" for="colonia">Colonia:</label>
-                <input type="text" data-ng-model="colonia" id="colonia" class="form-control" placeholder="Colonia">
-
-                <label class="control-label" for="estado">* Estado:</label>
-                <select data-ng-model="estado" ng-options="state as state.valor for state in estados" id="estado" class="form-control" placeholder="Estado"  required>
-                </select>
-
-                <label class="control-label" for="ciudad">* Ciudad:</label>
-                <select data-ng-model="ciudad" ng-options="city as city.nombre for city in estado.ciudades" id="ciudad" class="form-control" placeholder="Ciudad"  required>
-                </select>
-
-                <label class="control-label" for="zona">Zona:</label> <br>
-                <select ng-model="zona" id="zona" class="form-control">
-                    <option value=""> </option>
-                    <option value="Norte">Norte</option>
-                    <option value="Sur">Sur</option>
-                    <option value="Centro">Centro</option>
-                    <option value="Este">Este</option>
-                    <option value="Oeste">Oeste</option>
-                </select>
-
-                <label class="control-label" for="precio">Precio:</label>
-                <input type="text" data-ng-model="precio" id="precio" class="form-control" placeholder="Precio">
-
-                <label class="control-label" for="moneda">Moneda:</label>
-                <select ng-model="moneda" id="moneda" class="form-control" required>
-                    <option value="MNX">Pesos</option>
-                    <option value="USD">Dólares</option>
-                    <option value="EUR">Euros</option>
-                </select>
-
-                <label class="control-label" for="no_plantas">Número de plantas:</label>
-                <input type="number" data-ng-model="no_plantas" id="no_plantas" class="form-control" min ="1" max ="5">
-
-                <label class="control-label" for="no_habitaciones">Numero de habitaciones:</label>
-                <input type="number" data-ng-model="no_habitaciones" id="no_habitaciones" class="form-control" min = "1" max = "20">
-
-                <label class="control-label" for="no_banos">Número de baños:</label>
-                <input type="number" data-ng-model="no_banos" id="no_banos" class="form-control" min ="1" max ="10" step="0.5">
-
-                <label class="control-label" for="no_carros">Espacios de estacionamiento</label>
-                <input type="number" data-ng-model="no_carros" id="no_carros" class="form-control" min = "1" max = "10">
-
-                <label class="control-label" for="m2terreno">m2 Terreno:</label>
-                <input type="text" data-ng-model="m2terreno" id="m2terreno" class="form-control" placeholder="m2 de terreno">
-
-                <label class="control-label" for="m3construccion">m2 Construcción:</label>
-                <input type="text" data-ng-model="m3construccion" id="m3construccion" class="form-control" placeholder="m2 de construcción">
-
-                <label class="control-label" for="infoAdicional">Información Adicional:</label>
-                <textarea type="text" data-ng-model="infoAdicional" id="infoAdicional" class="form-control" style="height:100px" placeholder="Información Adicional" maxlength="250"> </textarea>
-
-                <label class="control-label" for="image">Seleccionar fotos</label><br>
-                <label >*** Solo puedes subir 5 imagenes</label><br>
-                <div class="controls">
-                    <input id="image" type="file" ngf-select data-ng-model="image" name="image" accept="image/*" ngf-resize="{width: 300, height: 300, quality: 1}" ngf-multiple="true">
+                <div class="form-group">
+                    <label class="control-label" for="colonia">Colonia:</label>
+                    <input type="text" data-ng-model="colonia" id="colonia" class="form-control" placeholder="Colonia">
                 </div>
 
-<!--               <label class="control-label" for="image">Imagenes adicionales</label><br>
-                 * Verificar que las imagenes no sean mayor a 2 MB
-                <div class="controls">
-                     <input id="imagenes" type="file" data-ng-model="imagenes" name="imagenes" base-sixty-four-input accept="image/*" multiple>
-                </div> -->
-                
-
-                <label class="control-label" for="nombreContacto">Nombre del contacto:</label>
-                <input type="text" data-ng-model="nombreContacto" id="nombreContacto" class="form-control" placeholder="Nombre del contacto">
-
-                <label class="control-label" for="telContacto">Teléfono de contacto:</label>
-                <input type="text" data-ng-model="telContacto" id="telContacto" class="form-control" placeholder="Teléfono de contacto">
-
-                <label class="control-label" for="mailContacto">Correo de contacto:</label>
-                <input type="text" data-ng-model="mailContacto" id="mailContacto" class="form-control" placeholder="Correo de contacto">
-
-                <div class="text-center form-group">
-                    <br><input type="submit" value="Guardar inmueble" class="btn btn-large btn-primary" ng-click="create(image)">
+                <div class="form-group" ng-class ="{'has-error':inmuebleForm.estado.$invalid && inmuebleForm.estado.$dirty}">
+                    <label class="control-label" for="estado">* Estado:</label>
+                    <select data-ng-model="estado" ng-options="state as state.valor for state in estados" id="estado" name="estado" class="form-control" placeholder="Estado"  required>
+                    </select>
                 </div>
+
+                <div class="form-group" ng-class ="{'has-error':inmuebleForm.ciudad.$invalid && inmuebleForm.ciudad.$dirty}">
+                    <label class="control-label" for="ciudad">* Ciudad:</label>
+                    <select data-ng-model="ciudad" ng-options="city as city.nombre for city in estado.ciudades" id="ciudad" name="ciudad" class="form-control" placeholder="Ciudad"  required>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="zona">Zona:</label> <br>
+                    <select ng-model="zona" id="zona" class="form-control">
+                        <option value=""> </option>
+                        <option value="Norte">Norte</option>
+                        <option value="Sur">Sur</option>
+                        <option value="Centro">Centro</option>
+                        <option value="Este">Este</option>
+                        <option value="Oeste">Oeste</option>
+                    </select>
+                </div>
+
+                <div class="form-group">                
+                    <label class="control-label" for="precio">Precio:</label>
+                    <input type="text" data-ng-model="precio" id="precio" class="form-control" placeholder="Precio">
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="moneda">Moneda:</label>
+                    <select ng-model="moneda" id="moneda" class="form-control">
+                        <option value="MNX">Pesos</option>
+                        <option value="USD">Dólares</option>
+                        <option value="EUR">Euros</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="no_plantas">Número de plantas:</label>
+                    <input type="number" data-ng-model="no_plantas" id="no_plantas" class="form-control" min ="1" max ="5">
+                </div>
+
+                <div class="form-group">                
+                    <label class="control-label" for="no_habitaciones">Numero de habitaciones:</label>
+                    <input type="number" data-ng-model="no_habitaciones" id="no_habitaciones" class="form-control" min = "1" max = "20">
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="no_banos">Número de baños:</label>
+                    <input type="number" data-ng-model="no_banos" id="no_banos" class="form-control" min ="1" max ="10" step="0.5">
+                </div>
+
+                <div class="form-group">            
+                    <label class="control-label" for="no_carros">Espacios de estacionamiento</label>
+                    <input type="number" data-ng-model="no_carros" id="no_carros" class="form-control" min = "1" max = "10">
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="m2terreno">m2 Terreno:</label>
+                    <input type="text" data-ng-model="m2terreno" id="m2terreno" class="form-control" placeholder="m2 de terreno">
+                </div>
+
+                <div class="form-group">                
+                    <label class="control-label" for="m3construccion">m2 Construcción:</label>
+                    <input type="text" data-ng-model="m3construccion" id="m3construccion" class="form-control" placeholder="m2 de construcción">
+                </div>
+
+                <div class="form-group">                
+                    <label class="control-label" for="infoAdicional">Información Adicional:</label>
+                    <textarea type="text" data-ng-model="infoAdicional" id="infoAdicional" class="form-control" style="height:100px" placeholder="Información Adicional" maxlength="250"> </textarea>
+                </div>
+
+                <div class="form-group" ng-class ="{'has-error':inmuebleForm.image.$invalid && inmuebleForm.image.$dirty}">
+                    <label class="control-label" for="image">* Seleccionar fotos (Debes ingresar al menos una imagen)</label><br>
+                    <label >*** Puedes ingresar máximo 10 imagenes</label><br>
+                    <div class="controls">
+                        <input id="image" type="file" ngf-select data-ng-model="image" name="image" accept="image/*" ngf-resize="{width: 300, height: 300, quality: 1}" ngf-multiple="true" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="nombreContacto">Nombre del contacto:</label>
+                    <input type="text" data-ng-model="nombreContacto" id="nombreContacto" class="form-control" placeholder="Nombre del contacto">
+                </div>
+
+                <div class="form-group">                
+                    <label class="control-label" for="telContacto">Teléfono de contacto:</label>
+                    <input type="text" data-ng-model="telContacto" id="telContacto" class="form-control" placeholder="Teléfono de contacto">
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="mailContacto">Correo de contacto:</label>
+                    <input type="text" data-ng-model="mailContacto" id="mailContacto" class="form-control" placeholder="Correo de contacto">
+                </div>
+
+                <div class="text-center form-group has-error">
+                    <br><span class="help-block" ng-show="inmuebleForm.$invalid">*** Completa todos los campos requeridos ***</span>
+                    <input type="submit" value="Guardar inmueble" ng-disabled="inmuebleForm.$invalid" class="btn btn-large btn-primary" ng-click="create(image)">
+                </div>
+
                 <div data-ng-show="error" class="text-danger">
                     <strong data-ng-bind="error"></strong>
                 </div>

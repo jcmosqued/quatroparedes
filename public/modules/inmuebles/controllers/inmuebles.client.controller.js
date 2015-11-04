@@ -236,6 +236,7 @@ para poder acceder a sus datos*/
 		// Create new Inmueble
 		$scope.create = function(image) {
 			// Create new Inmueble object
+                  $scope.error="Guardando registro";
 			var inmueble = new Inmuebles ({
 				titulo: this.titulo,
 				tipo_inmueble: this.tipo_inmueble,
@@ -288,6 +289,7 @@ para poder acceder a sus datos*/
                         $scope.nombreContacto="";
                         $scope.telContacto="";
                         $scope.mailContacto="";
+                        $scope.error="Registro guardado";
 				
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;

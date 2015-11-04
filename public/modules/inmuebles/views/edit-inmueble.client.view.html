@@ -40,16 +40,13 @@
                         </select>
                     </label> <br>
 
-                    <label class="control-label" for="estado">Estado</label>
-                    <div class="controls">
-                        <input type="text" data-ng-model="inmueble.estado" id="estado" class="form-control" placeholder="Estado">
-                    </div>
+                    <label class="control-label" for="estado">* Estado:</label>
+                    <select data-ng-model="estado" ng-options="state as state.valor for state in estados" id="estado" class="form-control" placeholder="Estado"  required>
+                    </select>
 
-
-                    <label class="control-label" for="ciudad">Ciudad</label>
-                    <div class="controls">
-                        <input type="text" data-ng-model="inmueble.ciudad" id="ciudad" class="form-control" placeholder="Ciudad" >
-                    </div>
+                    <label class="control-label" for="ciudad">* Ciudad:</label>
+                    <select data-ng-model="ciudad" ng-options="city as city.nombre for city in estado.ciudades" id="ciudad" class="form-control" placeholder="Ciudad"  required>
+                    </select>
 
                     <label class="control-label" for="zona">Zona: <br>
                         <select ng-model="inmueble.zona" id="zona" class="form-control" required>

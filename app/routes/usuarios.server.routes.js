@@ -12,7 +12,7 @@ module.exports = function(app) {
 		.get(usuarios.list)
 		.post(users.requiresLogin, usuarios.create);
 
-	app.route('/usuariosSite/:usuarioId')
+	app.route('/usuarios/:usuarioId')
 		.put(users.requiresLogin, multipartMiddleware, usuarios.update)
 
 	app.route('/usuarios/:usuarioId')

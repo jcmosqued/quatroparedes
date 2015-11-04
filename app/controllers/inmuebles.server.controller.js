@@ -6,7 +6,7 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Inmueble = mongoose.model('Inmueble'),
-	User = mongoose.model('User'),
+	//User = mongoose.model('User'),
 	fs = require('fs'),
 	_ = require('lodash'),
 	multiparty = require('multiparty'),
@@ -87,7 +87,7 @@ exports.read = function(req, res) {
 exports.update = function(req, res) {
 	var inmueble = req.inmueble ;
 	inmueble = _.extend(inmueble , req.body.inmueble);
-/*	var file = req.files.file;
+	var file = req.files.file;
 ////// Guarda las nuevas imagenes
     req.files.file.forEach(function (element, index, array){
     	if (index <=9){
@@ -96,7 +96,7 @@ exports.update = function(req, res) {
         	var extension = (extIndex < 0) ? '' : tmpPath.substr(extIndex);
 	        var fileName = uuid.v4() + extension;
     	    var destPath = './public/uploads/' + fileName;
-    	    inmueble.image[index] = '/uploads/' + fileName;
+    	    inmueble.image.set(index, '/uploads/' + fileName);
 	        var is = fs.createReadStream(tmpPath);
 	        var os = fs.createWriteStream(destPath);
 	        if(is.pipe(os)) {
@@ -108,7 +108,7 @@ exports.update = function(req, res) {
 	        } else
 	            return res.json('Archivo no guardado');
         }
-    }); 
+    });
 
     /////Elimina los archivos anteriores
 	req.body.inmueble.image.forEach(function (element, index, array){
@@ -117,8 +117,9 @@ exports.update = function(req, res) {
 		                    console.log(err);
 		                }
 		});
-	});*/
-
+	});
+	
+	//inmueble.update ()
 	inmueble.save(function(err) {
 		if (err) {
 			return res.status(400).send({
@@ -128,8 +129,6 @@ exports.update = function(req, res) {
 			res.jsonp(inmueble);
 		}
 	});
-	console.log(inmueble);
-
 };
 
 /**
