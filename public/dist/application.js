@@ -568,6 +568,7 @@ para poder acceder a sus datos*/
 		// Create new Inmueble
 		$scope.create = function(image) {
 			// Create new Inmueble object
+                  $scope.error="Guardando registro";
 			var inmueble = new Inmuebles ({
 				titulo: this.titulo,
 				tipo_inmueble: this.tipo_inmueble,
@@ -620,6 +621,7 @@ para poder acceder a sus datos*/
                         $scope.nombreContacto="";
                         $scope.telContacto="";
                         $scope.mailContacto="";
+                        $scope.error="Registro guardado";
 				
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
@@ -1115,8 +1117,8 @@ angular.module('usuarios').config(['$stateProvider',
 'use strict';
 
 // Usuarios controller
-angular.module('usuarios').controller('UsuariosController', ['$scope', '$stateParams', '$location', 'Authentication', 'Usuarios',
-	function($scope, $stateParams, $location, Authentication, Usuarios) {
+angular.module('usuarios').controller('UsuariosController', ['$scope', '$stateParams', '$location', 'Upload', 'Authentication', 'Usuarios',
+	function($scope, $stateParams, $location, Upload, Authentication, Usuarios) {
 		$scope.authentication = Authentication;
 
 		// Create new Usuario
@@ -1156,30 +1158,22 @@ angular.module('usuarios').controller('UsuariosController', ['$scope', '$statePa
 
 		// Update existing Usuario
 		$scope.update = function() {
-			var usuario = $scope.usuario;
-			
-			usuario.$update(function() {
-				$location.path('inmuebles/' + response._id);
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
 
-/*			var usuario = $scope.usuario;
+			var usuario = $scope.usuario;
 			Upload.upload({
-		        url: 'usuariosSite/' + usuario._id, 
+		        url: 'usuarios/' + usuario._id, 
                 method: 'PUT', 
                 headers: {'Content-Type': 'multipart/form-data'},
                 fields: {usuario: usuario},
                 file: [this.imgPortada,this.imgLogo]
 			}).success(function (response, status) {
-                          $location.path('inmuebles/' + response._id);
+                          $location.path('inmuebles');
                   }, function(errorResponse) {
                         $scope.error = errorResponse.data.message;
                   });
-            };*/
+            };
 
-			
-		};
+
 
 		// Update existing Usuario
 		$scope.updateSite = function() {
@@ -1199,9 +1193,11 @@ angular.module('usuarios').controller('UsuariosController', ['$scope', '$statePa
 
 		// Find existing Usuario
 		$scope.findOne = function() {
+
 			$scope.usuario = Usuarios.get({ 
 				usuarioId: $stateParams.usuarioId
 			});
+			console.log($scope.usuario);
 		};
 	}
 ]);
