@@ -89,27 +89,28 @@ exports.update = function(req, res) {
 	inmueble = _.extend(inmueble , req.body.inmueble);
 	var file = req.files.file;
 ////// Guarda las nuevas imagenes
-    req.files.file.forEach(function (element, index, array){
-    	if (index <=9){
-        	var tmpPath = element.path;	
-        	var extIndex = tmpPath.lastIndexOf('.');
-        	var extension = (extIndex < 0) ? '' : tmpPath.substr(extIndex);
-	        var fileName = uuid.v4() + extension;
-    	    var destPath = './public/uploads/' + fileName;
-    	    inmueble.image.set(index, '/uploads/' + fileName);
-	        var is = fs.createReadStream(tmpPath);
-	        var os = fs.createWriteStream(destPath);
-	        if(is.pipe(os)) {
-	            fs.unlink(tmpPath, function (err) { //To unlink the file from temp path after copy
-	                if (err) {
-	                    console.log(err);
-	                }
-	            });
-	        } else
-	            return res.json('Archivo no guardado');
-        }
-    });
-
+	if (file != null){
+	    req.files.file.forEach(function (element, index, array){
+	    	if (index <=9){
+	        	var tmpPath = element.path;	
+	        	var extIndex = tmpPath.lastIndexOf('.');
+	        	var extension = (extIndex < 0) ? '' : tmpPath.substr(extIndex);
+		        var fileName = uuid.v4() + extension;
+	    	    var destPath = './public/uploads/' + fileName;
+	    	    inmueble.image.set(index, '/uploads/' + fileName);
+		        var is = fs.createReadStream(tmpPath);
+		        var os = fs.createWriteStream(destPath);
+		        if(is.pipe(os)) {
+		            fs.unlink(tmpPath, function (err) { //To unlink the file from temp path after copy
+		                if (err) {
+		                    console.log(err);
+		                }
+		            });
+		        } else
+		            return res.json('Archivo no guardado');
+	        }
+	    });
+	}
     /////Elimina los archivos anteriores
 	req.body.inmueble.image.forEach(function (element, index, array){
 		fs.unlink('./public' + req.body.inmueble.image[index], function (err) { //To unlink the file from temp path after copy

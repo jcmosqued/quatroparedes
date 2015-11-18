@@ -99,7 +99,7 @@ exports.update = function(req, res) {
 			                }
 			});
 		};
-		if (req.body.usuario.imgPortada != 'uploads/defaultL.jpg'){
+		if (req.body.usuario.imgLogo != 'uploads/defaultL.jpg'){
 			fs.unlink('./public' + req.body.usuario.imgLogo, function (err) { //To unlink the file from temp path after copy
 			                if (err) {
 			                    console.log(err);
