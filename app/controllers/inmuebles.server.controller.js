@@ -110,7 +110,7 @@ exports.update = function(req, res) {
 		            return res.json('Archivo no guardado');
 	        }
 	    });
-	}
+	
     /////Elimina los archivos anteriores
 	req.body.inmueble.image.forEach(function (element, index, array){
 		fs.unlink('./public' + req.body.inmueble.image[index], function (err) { //To unlink the file from temp path after copy
@@ -119,7 +119,7 @@ exports.update = function(req, res) {
 		                }
 		});
 	});
-	
+	}
 	//inmueble.update ()
 	inmueble.save(function(err) {
 		if (err) {
