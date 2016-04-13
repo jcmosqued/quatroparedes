@@ -3,7 +3,7 @@
 module.exports = {
 	db: 'mongodb://localhost/quatroparedes-dev',
 	app: {
-		title: 'Quatroparedes'
+		title: 'REMOTEchnology'
 	},
 	facebook: {
 		clientID: process.env.FACEBOOK_ID || '144177522581552',

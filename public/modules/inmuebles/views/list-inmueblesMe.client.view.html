@@ -30,7 +30,7 @@
   </div><br> <br>
   <div class="row">
     <div class="col-md-4"><br>
-      <img src="modules/core/img/Logo1.png" width="300px" height="150px">
+      <img src="modules/core/img/Logo1.png" width="300px" height="80px">
     </div>
 
      <div class="col-md-4 text-center"><br><br>
@@ -109,11 +109,11 @@
                                <a ng-click="showModal(inmueble)"><font color="#000">Ver Más</font>
                                </a>
                             </div>
-                            <div class="col-sm-6 botonNaranja botonNaranja-naranja" data-ng-show="inmueble.user.tipo==='pagosite'">
+<!--                             <div class="col-sm-6 botonNaranja botonNaranja-naranja" data-ng-show="inmueble.user.tipo==='pagosite'">
 
                                 <a data-ng-href="#!/inmuebles/{{inmueble._id}}"><font color="#000">Ver Sitio</font>
                                 </a>
-                            </div>
+                            </div> -->
                             <div class="col-sm-6 botonNaranja botonNaranja-naranja" data-ng-show="((authentication.user) && (authentication.user._id == inmueble.user._id))">
                                <a data-ng-href="#!/inmuebles/{{inmueble._id}}/edit"><font color="#000">Editar</font>
                                </a>

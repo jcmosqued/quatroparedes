@@ -70,6 +70,21 @@
 				<a href="/#!/signin">Iniciar sesión</a>
 			</li>
 		</ul>
+
+		<ul class="nav navbar-nav navbar-left" >
+			<li ng-class="{active: $uiRoute}">
+				<a href="/#!/politicas">Politicas</a>
+			</li>
+			<li  ng-class="{active: $uiRoute}" data-ng-hide="authentication.user">
+				<a href="modules/core/views/Comprar.html">Comprar</a>
+			</li>
+			<li class="divider-vertical"></li>
+			<li  ng-class="{active: $uiRoute}" data-ng-hide="authentication.user">
+				<a href="/#!/politicas">Servicios</a>
+			</li>
+		</ul>
+
+
 	</nav>
 </div>
 
