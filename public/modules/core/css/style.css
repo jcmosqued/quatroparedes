@@ -80,14 +80,14 @@ p {
 /**** Start Background Color ****/
 
 .blue {
-  background: #3b3937;
-  border-top: 1px solid #e58d02;
-  border-right: 1px solid #e58d02;
-  border-bottom: 1px solid #e58d02;
-  border-left: 1px solid #e58d02;
+  background: #212121;
+  border-top: 1px solid #9CCC65;
+  border-right: 1px solid #9CCC65;
+  border-bottom: 2px solid #9CCC65;
+  border-left: 1px solid #9CCC65;
     -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
-    border-radius: 10px;
+    border-radius: 20px;
   color: #cfccc8;
 }
 
@@ -1035,7 +1035,7 @@ and (max-width : 991px) {
     font-size: 4;
     font-weight: bold;
     font-family: 'Arial cursive';
-    color: #3b3937;s
+    color: #3b3937;
 }
 
 .texttrans {
@@ -1043,7 +1043,7 @@ and (max-width : 991px) {
     font-size: 30px;
     font-weight: bold;
     font-family: 'Arial';
-    color: #e58d02;  
+    color: #e58d06;  
 }
 
 /*seccion e boton naranja*/
